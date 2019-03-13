@@ -8,7 +8,7 @@
 ?>
 <div class="wrap">
   <h1 class="wp-heading-inline">Pixbox Albums</h1>
-  <a href="<?= admin_url("admin.php?page=pixbox%2Fnew-album.php") ?>" class="page-title-action">Add New</a>
+  <a href="<?= admin_url("admin.php?page=pixbox%2Falbum-new.php") ?>" class="page-title-action">Add New</a>
   <hr class="wp-header-end">
   <ul class="pxbx-grid">
     <li class="pxbx-album">

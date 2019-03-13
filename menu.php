@@ -28,11 +28,11 @@ function pixbox_create_menu(){
     ''
   );
   add_submenu_page(
-    'pixbox/album.php',
+    'pixbox/albums.php',
     'Add New Pixbox Album',
     'Add New Album',
     'manage_options',
-    'pixbox/new-album.php',
+    'pixbox/album-new.php',
     ''
   );
 }
