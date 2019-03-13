@@ -27,7 +27,7 @@ if (!current_user_can('edit_posts')){
 <h1><?= $title ?></h1>
 
 <form action="<?= admin_url('admin-post.php') ?>" class="validate" method="post">
-  <input type="hidden" name="action" value="pxbx_album">
+  <input type="hidden" name="action" value="pxbx_album_new">
   <table class="form-table">
     <tr class="form-field form-required">
       <th scope="row"><label for="title"><?= $tax->labels->new_item_name ?></label></th>

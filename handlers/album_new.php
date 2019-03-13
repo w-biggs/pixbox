@@ -5,7 +5,7 @@
  * @package pixbox
  * @since 0.1.0
  */
-add_action('admin_post_pxbx_album', function() use ($pxbx_hasher){
+add_action('admin_post_pxbx_album_new', function() use ($pxbx_hasher){
   if(isset($_POST['title'])){
     $title = $_POST['title'];
     $parent = 0;
@@ -28,7 +28,8 @@ add_action('admin_post_pxbx_album', function() use ($pxbx_hasher){
       $redir = add_query_arg(array( 
         'page' => 'pixbox%2Falbums.php',
         'termid' => $term['term_id'],
-        'metaid' => $metaid
+        'metaid' => $metaid,
+        'action' => 'add'
       ), 'admin.php');
       wp_redirect($redir);
       exit;

@@ -57,14 +57,15 @@ td.column-title strong{
   justify-content: center;
 }
 
-.pxbx-tool-link[href]{
+.pxbx-tool-link, .pxbx-tool-link[href]{
   color: white;
   text-decoration: none;
   display: inline-block;
-  font-size: .9em;
+  font-size: .9rem;
   opacity: 0.5;
 }
 
+.pxbx-album:hover .pxbx-tool-link,
 .pxbx-album:hover .pxbx-tool-link[href]{
   opacity: 1;
 }
@@ -75,12 +76,42 @@ td.column-title strong{
   opacity: 0.8;
 }
 
-.pxbx-tool-link:not(:last-child){
+.pxbx-album-tools > .pxbx-edit-link{
   margin-right: 1em;
 }
 
-.pxbx-delete-link[href]{
+.pxbx-delete-link, .pxbx-delete-link[href]{
   color: #ff6868;
+}
+
+.pxbx-album-tools input[type=checkbox]{
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.pxbx-delete-confirmation{
+  display: none;
+}
+
+.pxbx-delete-button{
+  padding:0;
+  background:transparent;
+  border:none;
+  cursor: pointer;
+}
+
+.pxbx-album-tools label{
+  vertical-align: inherit;
+}
+
+.pxbx-album-tools input[type=checkbox]:checked ~ label.pxbx-delete-link,
+.pxbx-album-tools input[type=checkbox]:checked ~ .pxbx-edit-link{
+  display: none;
+}
+
+.pxbx-album-tools input[type=checkbox]:checked ~ .pxbx-delete-confirmation{
+  display: inline;
 }
 
 @media screen and (min-width: 576px){

@@ -32,7 +32,7 @@ function pixbox_create_menu(){
     'Add New Pixbox Album',
     'Add New Album',
     'manage_options',
-    'pixbox/album-new.php',
+    'pixbox/album_new.php',
     ''
   );
 }
