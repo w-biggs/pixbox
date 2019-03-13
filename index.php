@@ -10,6 +10,13 @@
  * Text Domain: pixbox
  */
 
+// for hashing album passwords
+if(!class_exists("PasswordHash")) {
+  require_once ABSPATH . WPINC . '/class-phpass.php';
+}
+$pxbx_hasher = new PasswordHash(16, FALSE);
+
 include plugin_dir_path( __FILE__ ) . 'menu.php';
 include plugin_dir_path( __FILE__ ) . 'options.php';
 include plugin_dir_path( __FILE__ ) . 'post_tax.php';
+include plugin_dir_path( __FILE__ ) . 'handlers/album.php';

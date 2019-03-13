@@ -26,7 +26,8 @@ if (!current_user_can('edit_posts')){
 ?>
 <h1><?= $title ?></h1>
 
-<form action="<?= plugins_url('album-new.php') ?>" class="validate">
+<form action="<?= admin_url('admin-post.php') ?>" class="validate" method="post">
+  <input type="hidden" name="action" value="pxbx_album">
   <table class="form-table">
     <tr class="form-field form-required">
       <th scope="row"><label for="title"><?= $tax->labels->new_item_name ?></label></th>
@@ -59,9 +60,9 @@ if (!current_user_can('edit_posts')){
       </td>
     </tr>
     <tr class="form-field">
-      <th scope="row"><label for="albumpass"><?= __('Password') ?></label></th>
+      <th scope="row"><label for="album_pass"><?= __('Password') ?></label></th>
       <td>
-        <input type="text" name="albumpass" id="albumpass" value="<?= wp_generate_password() ?>">
+        <input type="text" name="album_pass" id="album_pass" value="<?= wp_generate_password() ?>">
         <p class="description">You can either use the generated password or type in your own.</p>
       </td>
     </tr>
