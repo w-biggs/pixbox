@@ -1,6 +1,11 @@
 <?php
+/**
+ * Register post type and taxonomy.
+ * 
+ * @package pixbox
+ * @since 0.1.0
+ */
 
-// register post type + taxonomy
 function pixbox_register_post_tax() {
 	register_post_type('pixbox_photo', array(
 		'label'                 => __( 'Photo', 'pixbox' ),

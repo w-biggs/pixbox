@@ -1,4 +1,11 @@
 <?php
+/**
+ * Pixbox option page.
+ * 
+ * @package pixbox
+ * @since 0.1.0
+ */
+
 add_action('admin_menu', 'pixbox_create_options_menu');
 
 function pixbox_create_options_menu(){

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Add pages to the menu.
+ * 
+ * @package pixbox
+ * @since 0.1.0
+ */
+
 add_action('admin_menu', 'pixbox_create_menu');
 
 function pixbox_create_menu(){
@@ -18,6 +25,14 @@ function pixbox_create_menu(){
     'Albums',
     'manage_options',
     'pixbox/albums.php',
+    ''
+  );
+  add_submenu_page(
+    'pixbox/album.php',
+    'Add New Pixbox Album',
+    'Add New Album',
+    'manage_options',
+    'pixbox/new-album.php',
     ''
   );
 }
