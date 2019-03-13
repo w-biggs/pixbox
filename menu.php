@@ -6,16 +6,20 @@ function pixbox_create_menu(){
   add_menu_page(
     'Pixbox',
     'Pixbox',
-    'administrator',
-    'pixbox',
-    'pixbox_albums_page',
+    'manage_options',
+    'pixbox/albums.php',
+    '',
     plugins_url('pixbox/images/icon.png'),
     31
   );
-}
-
-function pixbox_albums_page(){
-  echo 'hello.';
+  add_submenu_page(
+    'pixbox/albums.php',
+    'Pixbox Albums',
+    'Albums',
+    'manage_options',
+    'pixbox/albums.php',
+    ''
+  );
 }
 
 // add separator above Pixbox album in admin menu
@@ -33,3 +37,11 @@ function pixbox_add_separator(){
   }
   ksort( $menu );
 }
+
+function load_pixbox_albums_style($hook) {
+  if($hook != 'pixbox/albums.php') {
+    return;
+  }
+  wp_enqueue_style('pixbox_albums_css', plugins_url('pixbox/css/albums.css'));
+}
+add_action('admin_enqueue_scripts', 'load_pixbox_albums_style');

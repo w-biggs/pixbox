@@ -3,11 +3,11 @@ add_action('admin_menu', 'pixbox_create_options_menu');
 
 function pixbox_create_options_menu(){
   add_submenu_page(
-    'pixbox',
+    'pixbox/albums.php',
     'Pixbox Settings',
-    'Pixbox Settings',
-    'administrator',
-    'pixbox-options',
+    'Settings',
+    'manage_options',
+    'pixbox/options.php',
     'pixbox_settings_page'
   );
   add_action( 'admin_init', 'register_pixbox_settings' );
@@ -33,6 +33,9 @@ function pixbox_settings_page(){
         </tr>
       </table>
       <?php submit_button(); ?>
+      <small>
+        Folder icon by <a href="https://github.com/fabianalexisinostroza/Antu-icons">Fabián Alexis</a>.
+      </small>
     </form>
   </div>
 <?php
