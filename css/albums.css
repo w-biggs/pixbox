@@ -16,6 +16,12 @@ td.column-title strong{
   background-color: rgba(0,0,0,0.5);
 }
 
+.pxbx-album{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .pxbx-album-anchor[href]{
   width: 100%;
   display: flex;
@@ -26,12 +32,13 @@ td.column-title strong{
   text-decoration: none;
   flex-direction: column;
   transition: transform 0.1s;
+  margin-bottom: 0.125em;
 }
 
-.pxbx-album-anchor:hover{
+/*.pxbx-album-anchor:hover{
   transform: scale(1.01);
   transition: transform 0.15s;
-}
+}*/
 
 .pxbx-album-anchor::before{
   content: url('../images/folder.svg');
@@ -40,9 +47,40 @@ td.column-title strong{
   transition: filter 0.1s;
 }
 
-.pxbx-album-anchor:hover::before{
+/*.pxbx-album-anchor:hover::before{
   filter: drop-shadow( 5px 5px 5px rgba(0, 0, 0, .4));
   transition: filter 0.15s;
+}*/
+
+.pxbx-album-tools{
+  display: flex;
+  justify-content: center;
+}
+
+.pxbx-tool-link[href]{
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  font-size: .9em;
+  opacity: 0.5;
+}
+
+.pxbx-album:hover .pxbx-tool-link[href]{
+  opacity: 1;
+}
+
+.pxbx-album:hover .pxbx-tool-link:hover,
+.pxbx-album:hover .pxbx-tool-link:active,
+.pxbx-album:hover .pxbx-tool-link:focus{
+  opacity: 0.8;
+}
+
+.pxbx-tool-link:not(:last-child){
+  margin-right: 1em;
+}
+
+.pxbx-delete-link[href]{
+  color: #ff6868;
 }
 
 @media screen and (min-width: 576px){

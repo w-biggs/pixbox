@@ -8,6 +8,10 @@
           Event Name
         </span>
       </a>
+      <div class="pxbx-album-tools">
+        <a class="pxbx-tool-link" href="#">Edit</a>
+        <a class="pxbx-tool-link pxbx-delete-link" href="#">Delete</a>
+      </div>
     </li>
   </ul>
 </div>
