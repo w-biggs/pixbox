@@ -1,5 +1,5 @@
 === Pixbox ===
-Contributors: w-biggs
+Contributors: wilsonbiggs
 Tags: photo album, photos, gallery, upload, photography
 Donate link: https://paypal.me/wbiggs1
 Tested up to: 5.1
@@ -9,4 +9,5 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A private photo albums plugin.
 
 == Changelog ==
-- 0.1: Work in Progress
+- 0.2: Back-end is useable
+- 0.1: Work in progress
