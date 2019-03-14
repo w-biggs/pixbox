@@ -40,6 +40,7 @@ if (!current_user_can('edit_posts')){
 
 <form action="<?= admin_url('admin-post.php') ?>" class="validate" method="post">
   <input type="hidden" name="action" value="pxbx_album_edit">
+  <input type="hidden" name="album_ID" value="<?= $term->term_id ?>">
   <table class="form-table">
     <tr class="form-field form-required">
       <th scope="row"><label for="title"><?= __( 'Album Name', 'pixbox' ) ?></label></th>
@@ -75,10 +76,11 @@ if (!current_user_can('edit_posts')){
     <tr class="form-field">
       <th scope="row"><label for="album_pass"><?= __('Password') ?></label></th>
       <td>
-        <input type="text" name="album_pass" id="album_pass">
         <?php if(array_key_exists('album_pass', $term_meta)): ?>
+          <input type="text" name="album_pass" id="album_pass">
           <p class="description">To change the password, type in a new one here.</p>
         <?php else: ?>
+          <input type="text" name="album_pass" id="album_pass" value="<?= wp_generate_password(); ?>">
           <p class="description">You can either use the generated password or type in your own.</p>
       </td>
       <?php endif; ?>
