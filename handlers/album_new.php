@@ -16,6 +16,9 @@ add_action('admin_post_pxbx_album_new', function() use ($pxbx_hasher){
     $pass = null;
     if(isset($_POST['parent'])){
       $parent = $_POST['parent'];
+      $redir = add_query_arg(array(
+        'album_ID' => $parent,
+      ), $redir);
     }
     $term = wp_insert_term($title, 'pixbox_albums', array(
       'parent' => $parent
@@ -39,6 +42,6 @@ add_action('admin_post_pxbx_album_new', function() use ($pxbx_hasher){
       'error' => 'No title was given.',
     ), $redir);
   }
-  wp_redirect(esc_url($redir));
+  wp_redirect($redir);
   exit;
 });

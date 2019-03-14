@@ -12,8 +12,10 @@ add_action('admin_post_pxbx_album_delete', function(){
   ), 'admin.php');
   if(isset($_POST['album_id'])){
     $album_id = $_POST['album_id'];
+    $album = get_term($album_id, 'pixbox_albums');
     $redir = add_query_arg(array( 
-      'termid' => $album_id
+      'termid' => $album_id,
+      'album_ID' => $album->parent
     ), $redir);
     $deletion = wp_delete_term($album_id, 'pixbox_albums');
     if(is_wp_error($deletion)){

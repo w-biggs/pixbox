@@ -1,3 +1,9 @@
+.pxbx-parent-link{
+  text-decoration: none;
+  display: block;
+  margin: .75em 0 .5em;
+}
+
 td.column-title strong{
   margin-bottom: 0;
 }

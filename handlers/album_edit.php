@@ -21,6 +21,9 @@ add_action('admin_post_pxbx_album_edit', function() use ($pxbx_hasher){
       $pass = null;
       if(isset($_POST['parent'])){
         $parent = $_POST['parent'];
+        $redir = add_query_arg(array(
+          'album_ID' => $parent,
+        ), $redir);
       }
       if(isset($_POST['passcheck'])){
         if(isset($_POST['album_pass']) && !empty($_POST['album_pass'])){
@@ -41,6 +44,6 @@ add_action('admin_post_pxbx_album_edit', function() use ($pxbx_hasher){
       'error' => 'No album ID was given.',
     ), $redir);
   }
-  wp_redirect(esc_url($redir));
+  wp_redirect($redir);
   exit;
 });
