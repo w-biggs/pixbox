@@ -6,11 +6,13 @@
  * @since 0.1.0
  */
 
+$tax = get_taxonomy('pixbox_albums');
 $this_album = 0;
 $album_obj = null;
 $parent = 0;
 $parent_name = "Pixbox Albums";
 $title = "Pixbox Albums";
+$add_new = __('Add New', 'pixbox');
 
 if(!empty($_REQUEST['album_ID']) && $_REQUEST['album_ID'] > 0){
   $this_album = $_REQUEST['album_ID'];
@@ -20,6 +22,7 @@ if(!empty($_REQUEST['album_ID']) && $_REQUEST['album_ID'] > 0){
   if($parent){
     $parent_name = get_term($parent, 'pixbox_albums')->name;
   }
+  $add_new = $tax->labels->add_new_item;
 }
 
 $albums = get_terms(array(
@@ -35,8 +38,10 @@ $albums = get_terms(array(
     esc_url(add_query_arg(array(
       'action' => 'new',
       'parent_ID' => $this_album
-    ), admin_url("admin.php?page=pixbox%2Falbum.php"))) ?>" class="page-title-action">Add New</a>
+    ), admin_url("admin.php?page=pixbox%2Falbum.php"))) ?>"
+    class="page-title-action"><?= $add_new ?></a>
   <?php if(!is_null($album_obj)): ?>
+  <a href="#" class="page-title-action"><?= __('Upload Photos', 'pixbox'); ?></a>
     <a class="pxbx-parent-link" href="<?=
         esc_url(add_query_arg(array(
           'album_ID' => $parent
@@ -46,7 +51,7 @@ $albums = get_terms(array(
   <hr class="wp-header-end">
   <ul class="pxbx-grid">
     <?php if(empty($albums)): ?>
-      <h2 class="pxbx-no-albums">No albums found.</h2>
+      <h2 class="pxbx-no-albums"><?= __('No albums found.','pixbox') ?></h2>
     <?php else: ?>
       <?php foreach ($albums as $album): ?>
         <li class="pxbx-album">
