@@ -31,8 +31,8 @@ function pixbox_create_menu(){
     'pixbox/albums.php',
     'Add New Pixbox Album',
     'Add New Album',
-    'manage_options',
-    'pixbox/album_new.php',
+    'edit_posts',
+    'pixbox/album.php',
     ''
   );
 }
