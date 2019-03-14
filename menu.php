@@ -35,6 +35,14 @@ function pixbox_create_menu(){
     'pixbox/album.php',
     ''
   );
+  add_submenu_page(
+    'pixbox/albums.php',
+    'Upload Photos',
+    'Upload Photos',
+    'edit_posts',
+    'pixbox/upload.php',
+    ''
+  );
 }
 
 // add separator above Pixbox album in admin menu
