@@ -39,7 +39,7 @@ function pixbox_register_post_tax() {
 		'supports'              => array( 'title', 'custom-fields' ),
 		'taxonomies'            => array( 'pixbox_albums' ),
 		'hierarchical'          => false,
-		'public'                => true,
+		'public'                => false,
 		'show_ui'               => true,
 		'show_in_menu'          => false,
 		'show_in_admin_bar'     => false,
@@ -47,7 +47,7 @@ function pixbox_register_post_tax() {
 		'can_export'            => true,
 		'has_archive'           => false,
 		'exclude_from_search'   => true,
-		'publicly_queryable'    => false,
+		'publicly_queryable'    => true,
 		'rewrite'               => false,
 		'capability_type'       => 'page',
 	));

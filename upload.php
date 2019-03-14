@@ -16,7 +16,7 @@ if(!empty($_REQUEST['album']) && $_REQUEST['album'] > 0){
 
 <div class="wrap">
   <h1 class="wp-heading-inline">Upload Photos</h1>
-  <form action="admin_post.php" method="post">
+  <form action="<?= admin_url('admin-post.php') ?>" method="post" enctype="multipart/form-data">
     <input type="hidden" name="action" value="pxbx_upload">
     <table class="form-table">
       <tr class="form-field">
@@ -40,7 +40,7 @@ if(!empty($_REQUEST['album']) && $_REQUEST['album'] > 0){
       <tr class="form-field">
         <th scope="row"><label for="upload"><?= __('Choose Files') ?></label></th>
         <td>
-          <input type="file" name="upload" id="upload" accept="image/*,video/*" multiple>
+          <input type="file" name="upload[]" id="upload" accept="image/*,video/*" multiple>
         </td>
       </tr>
     </table>

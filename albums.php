@@ -30,6 +30,20 @@ $albums = get_terms(array(
   'hide_empty' => false,
   'parent' => $this_album
 ));
+
+$photos = get_posts(array(
+  'posts_per_page'  => -1,
+  'orderby'         => 'title',
+  'post_type'       => 'pixbox_photo',
+  'post_status'     => 'any',
+  'tax_query'       => array(
+    array(
+      'taxonomy'         => 'pixbox_albums',
+      'terms'            => $this_album,
+      'include_children' => false,
+    )
+  )
+));
 ?>
 
 <div class="wrap">
@@ -41,7 +55,11 @@ $albums = get_terms(array(
     ), admin_url("admin.php?page=pixbox%2Falbum.php"))) ?>"
     class="page-title-action"><?= $add_new ?></a>
   <?php if(!is_null($album_obj)): ?>
-  <a href="#" class="page-title-action"><?= __('Upload Photos', 'pixbox'); ?></a>
+    <a href="<?=
+        esc_url(add_query_arg(array(
+          'album' => $this_album
+        ), admin_url('admin.php?page=pixbox%2Fupload.php')))
+      ?>" class="page-title-action"><?= __('Upload Photos', 'pixbox'); ?></a>
     <a class="pxbx-parent-link" href="<?=
         esc_url(add_query_arg(array(
           'album_ID' => $parent
@@ -50,17 +68,17 @@ $albums = get_terms(array(
   <?php endif; ?>
   <hr class="wp-header-end">
   <ul class="pxbx-grid">
-    <?php if(empty($albums)): ?>
+    <?php if(empty($albums) && empty($photos)): ?>
       <h2 class="pxbx-no-albums"><?= __('No albums found.','pixbox') ?></h2>
     <?php else: ?>
       <?php foreach ($albums as $album): ?>
-        <li class="pxbx-album">
+        <li class="pxbx-item pxbx-album">
           <a href="<?=
               esc_url(add_query_arg(array(
                 'album_ID' => $album->term_id
               ), admin_url('admin.php?page=pixbox%2Falbums.php')))
-            ?>" class="pxbx-album-anchor">
-            <span class="pxbx-album-title">
+            ?>" class="pxbx-item-anchor pxbx-album-anchor">
+            <span class="pxbx-item-title">
               <?= $album->name ?>
             </span>
           </a>
@@ -79,7 +97,7 @@ $albums = get_terms(array(
               /
               <label class="pxbx-tool-link" for="delete_<?= $album->term_id ?>">No</label>
             </span>
-            <form action="<?= admin_url('admin-post.php') ?>" id="delete_form_<?= $album->term_id ?>" method="post">
+            <form action="<?= admin_url('admin-post.php'); ?>" id="delete_form_<?= $album->term_id ?>" method="post">
               <input type="hidden" name="action" value="pxbx_album_delete">
               <input type="hidden" name="album_id" value="<?= $album->term_id ?>">
             </form>
@@ -87,5 +105,17 @@ $albums = get_terms(array(
         </li>
       <?php endforeach; ?>
     <?php endif; ?>
+    <?php foreach($photos as $photo): ?>
+      <li class="pxbx-item pxbx-photo">
+        <a href="<?= get_post_meta($photo->ID, 'fullres', true) ?>" class="pxbx-item-anchor pxbx-photo-anchor">
+          <div class="pxbx-photo-thumb-container">
+            <img src="<?= get_post_meta($photo->ID, 'fullres', true) ?>" alt="<?= $photo->post_title ?>" class="pxbx-photo-thumb">
+          </div>
+          <span class="pxbx-item-title pxbx-photo-title">
+            <?= $photo->post_title ?>
+          </span>
+        </a>
+      </li>
+    <?php endforeach; ?>
   </ul>
 </div>
