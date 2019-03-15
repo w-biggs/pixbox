@@ -44,6 +44,8 @@ $photos = get_posts(array(
     )
   )
 ));
+
+wp_enqueue_style('pixbox_albums_css');
 ?>
 
 <div class="wrap">
@@ -69,7 +71,7 @@ $photos = get_posts(array(
   <hr class="wp-header-end">
   <ul class="pxbx-grid">
     <?php if(empty($albums) && empty($photos)): ?>
-      <h2 class="pxbx-no-albums"><?= __('No albums found.','pixbox') ?></h2>
+      <h2 class="pxbx-empty"><?= __('No albums or photos found.','pixbox') ?></h2>
     <?php else: ?>
       <?php foreach ($albums as $album): ?>
         <li class="pxbx-item pxbx-album">
@@ -104,18 +106,18 @@ $photos = get_posts(array(
           </div>
         </li>
       <?php endforeach; ?>
+      <?php foreach($photos as $photo): ?>
+        <li class="pxbx-item pxbx-photo">
+          <a href="<?= get_post_meta($photo->ID, 'fullres', true) ?>" class="pxbx-item-anchor pxbx-photo-anchor">
+            <div class="pxbx-photo-thumb-container">
+              <img src="<?= get_post_meta($photo->ID, 'fullres', true) ?>" alt="<?= $photo->post_title ?>" class="pxbx-photo-thumb">
+            </div>
+            <span class="pxbx-item-title pxbx-photo-title">
+              <?= $photo->post_title ?>
+            </span>
+          </a>
+        </li>
+      <?php endforeach; ?>
     <?php endif; ?>
-    <?php foreach($photos as $photo): ?>
-      <li class="pxbx-item pxbx-photo">
-        <a href="<?= get_post_meta($photo->ID, 'fullres', true) ?>" class="pxbx-item-anchor pxbx-photo-anchor">
-          <div class="pxbx-photo-thumb-container">
-            <img src="<?= get_post_meta($photo->ID, 'fullres', true) ?>" alt="<?= $photo->post_title ?>" class="pxbx-photo-thumb">
-          </div>
-          <span class="pxbx-item-title pxbx-photo-title">
-            <?= $photo->post_title ?>
-          </span>
-        </a>
-      </li>
-    <?php endforeach; ?>
   </ul>
 </div>
