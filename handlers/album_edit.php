@@ -5,7 +5,7 @@
  * @package pixbox
  * @since 0.1.0
  */
-add_action('admin_post_pxbx_album_edit', function() use ($pxbx_hasher){
+add_action('admin_post_pxbx_album_edit', function(){
   $redir = add_query_arg(array( 
     'page' => 'pixbox%2Falbums.php',
     'action' => 'edit'
@@ -27,9 +27,7 @@ add_action('admin_post_pxbx_album_edit', function() use ($pxbx_hasher){
       }
       if(isset($_POST['passcheck'])){
         if(isset($_POST['album_pass']) && !empty($_POST['album_pass'])){
-          $pass = $_POST['album_pass'];
-          $hashedpass = $pxbx_hasher->HashPassword(trim($pass));
-          update_term_meta($term->term_id, 'album_pass', $hashedpass);
+          update_term_meta($term->term_id, 'album_pass', $_POST['album_pass']);
         }
       } else {
         delete_term_meta($term->term_id, 'album_pass');
