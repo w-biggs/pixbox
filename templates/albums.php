@@ -19,7 +19,7 @@ $parent_name = "Albums";
 if(!empty($_REQUEST['album']) && $_REQUEST['album'] > 0){
   $this_album = $_REQUEST['album'];
   $album_obj = get_term($this_album, 'pixbox_albums');
-  $title = "Pixbox: " . $album_obj->name;
+  $title = $album_obj->name;
   $parent = $album_obj->parent;
   if($parent){
     $parent_name = get_term($parent, 'pixbox_albums')->name;
@@ -49,9 +49,14 @@ $photos = get_posts(array(
 ?>
 <div class="wrap">
   <div class="pixbox-front">
-    <h1 class="pixbox-title">Albums</h1>
+    <h1 class="pixbox-title"><?= $title ?></h1>
     <?php if($parent !== $this_album): ?>
-      <a class="pxbx-parent-link" href="?album=<?= $parent ?>" data-id="<?= $parent ?>">&lt; <?= $parent_name ?></a>
+      <?php
+      $query = "?";
+      if($parent > 0){
+        $query += "album=" . $parent;
+      } ?>
+      <a class="pxbx-parent-link" href="<?= $query ?>" data-id="<?= $parent ?>">&lt; <?= $parent_name ?></a>
     <?php endif; ?>
     <ul class="pxbx-grid">
       <?php if(empty($albums) && empty($photos)): ?>
@@ -85,13 +90,13 @@ $photos = get_posts(array(
 <?php $ajax_nonce = wp_create_nonce('pixbox'); ?>
 <script>
   jQuery(document).ready(function($){
-    const fetchAlbum = function(album){
+    const fetchAlbum = function(thisAlbum){
       const data = {
         url: '<?= admin_url('admin-ajax.php') ?>',
         data: {
           action: 'get_pixbox_items',
           nonce: '<?= $ajax_nonce ?>',
-          album: album
+          album: thisAlbum
         }
       };
       $.post(data)
@@ -101,13 +106,17 @@ $photos = get_posts(array(
           const photos = result.photos;
           $('.pixbox-title').html(result.title);
           if(result.parent !== result.id){
+            let href = '?';
+            if(result.parent > 0){
+              href += 'album=' + result.parent;
+            }
             if($('.pxbx-parent-link').length){
-              $('.pxbx-parent-link').attr('href', '?album=' + result.parent);
+              $('.pxbx-parent-link').attr('href', href);
               $('.pxbx-parent-link').data('id', result.parent);
               $('.pxbx-parent-link').html('&lt; ' + result.parentName);
             } else {
-              $('.pixbox-title').after('<a class="pxbx-parent-link" href="?album=' +
-                result.parent + '" data-id="' + result.parent + '">&lt; ' +
+              $('.pixbox-title').after('<a class="pxbx-parent-link" href="' +
+                href + '" data-id="' + result.parent + '">&lt; ' +
                 result.parentName + '</a>');
             }
           } else {
@@ -146,6 +155,11 @@ $photos = get_posts(array(
             });
           }
           $(".pxbx-grid").html(html.join("\n"));
+          let url = window.location.href.split('?')[0];
+          if(thisAlbum > 0){
+            url += '?album=' + thisAlbum;
+          }
+          history.pushState({},'',url);
         })
         .fail(function(request){
           console.error("AJAX request failed: " + request.status + " - " + request.statusText);
