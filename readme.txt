@@ -9,5 +9,5 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A private photo albums plugin.
 
 == Changelog ==
-- 0.2: Back-end is useable
+- 0.2: Back-end is usable
 - 0.1: Work in progress
