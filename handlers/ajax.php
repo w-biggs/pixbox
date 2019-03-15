@@ -6,10 +6,12 @@
  * @since 0.3.0
  */
 
-add_action('wp_ajax_get_pixbox_items', 'get_pixbox_items');
-add_action('wp_ajax_nopriv_get_pixbox_items', 'get_pixbox_items');
+add_action('wp_ajax_pxbx_get_items', 'pxbx_get_items');
+add_action('wp_ajax_nopriv_pxbx_get_items', 'pxbx_get_items');
+add_action('wp_ajax_pxbx_check_password', 'pxbx_check_password');
+add_action('wp_ajax_nopriv_pxbx_check_password', 'pxbx_check_password');
 
-function get_pixbox_items(){
+function pxbx_get_items(){
   check_ajax_referer('pixbox', 'nonce');
   $this_album = 0;
   $album_obj = null;
@@ -24,6 +26,8 @@ function get_pixbox_items(){
     if($parent){
       $parent_name = get_term($parent, 'pixbox_albums')->name;
     }
+  } else {
+    
   }
   $albums = get_terms(array(
     'taxonomy' => 'pixbox_albums',
@@ -70,5 +74,26 @@ function get_pixbox_items(){
     );
   }
   echo json_encode($items);
+  wp_die();
+}
+
+function pxbx_check_password(){
+  check_ajax_referer('pixbox', 'nonce');
+  if(!isset($_POST['album']) || !isset($_POST['password'])){
+    wp_send_json_error();
+    wp_die();
+  }
+  $album = $_POST['album'];
+  $in_pass = $_POST['password'];
+  $album_pass = get_term_meta($album,'album_pass',true);
+  if(empty($album_pass)){
+    wp_send_json_error();
+    wp_die();
+  }
+  $return = array(
+    'success'  => true,
+    'matches' => ($album_pass === $in_pass)
+  );
+  wp_send_json($return);
   wp_die();
 }
