@@ -105,7 +105,11 @@ $photos = get_posts(array(
       };
       $.post(data)
         .done(function(result){
-          result = JSON.parse(result);
+          if(!result.success){
+            console.error(result.data);
+            return false;
+          }
+          result = result.data;
           const albums = result.albums;
           const photos = result.photos;
           $('.pixbox-title').html(result.title);
@@ -191,7 +195,7 @@ $photos = get_posts(array(
         if(password !== null){
           $.post(passdata)
             .done(function(result){
-              if(result.matches){
+              if(result.data){
                 fetchAlbum(id);
               } else {
                 alert("Incorrect password.");

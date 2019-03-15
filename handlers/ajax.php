@@ -26,8 +26,6 @@ function pxbx_get_items(){
     if($parent){
       $parent_name = get_term($parent, 'pixbox_albums')->name;
     }
-  } else {
-    
   }
   $albums = get_terms(array(
     'taxonomy' => 'pixbox_albums',
@@ -73,27 +71,23 @@ function pxbx_get_items(){
       'fullres' => get_post_meta($photo->ID, 'fullres', true)
     );
   }
-  echo json_encode($items);
+  wp_send_json_success($items);
   wp_die();
 }
 
 function pxbx_check_password(){
   check_ajax_referer('pixbox', 'nonce');
   if(!isset($_POST['album']) || !isset($_POST['password'])){
-    wp_send_json_error();
+    wp_send_json_error("You must supply both an album and a password to check.");
     wp_die();
   }
   $album = $_POST['album'];
   $in_pass = $_POST['password'];
   $album_pass = get_term_meta($album,'album_pass',true);
   if(empty($album_pass)){
-    wp_send_json_error();
+    wp_send_json_error("Given album doesn't have a password!");
     wp_die();
   }
-  $return = array(
-    'success'  => true,
-    'matches' => ($album_pass === $in_pass)
-  );
-  wp_send_json($return);
+  wp_send_json_success($album_pass === $in_pass);
   wp_die();
 }
