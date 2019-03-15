@@ -52,9 +52,14 @@ function get_pixbox_items(){
     'photos' => array()
   );
   foreach ($albums as $album) {
+    $password = false;
+    if(!empty(get_term_meta($album->term_id,'album_pass'))){
+      $password = true;
+    }
     $items['albums'][] = array(
-      'name' => $album->name,
-      'id'   => $album->term_id
+      'name'     => $album->name,
+      'id'       => $album->term_id,
+      'password' => $password
     );
   }
   foreach ($photos as $photo) {

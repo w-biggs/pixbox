@@ -21,7 +21,7 @@ if (empty($_REQUEST['album_ID'])) {
 }
 
 $term = get_term($_REQUEST['album_ID'], $taxonomy);
-$term_meta = get_term_meta($term->term_id, '');
+$term_meta = get_term_meta($term->term_id);
 
 if (!empty($_REQUEST['parent_ID'])) {
   $parent = $_REQUEST['parent_ID'];
