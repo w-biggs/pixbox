@@ -1,3 +1,8 @@
+/* override twenty seventeen */
+a[href]{
+  box-shadow: none;
+}
+
 .pxbx-parent-link{
   text-decoration: none;
   display: block;
@@ -21,6 +26,10 @@ td.column-title strong{
   border: 1px solid #ddd;
   box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
   background-color: rgba(0,0,0,0.5);
+}
+
+.pxbx-empty, .pxbx-nojs{
+  color: white;
 }
 
 .pxbx-item{
@@ -157,5 +166,17 @@ td.column-title strong{
 @media screen and (min-width: 768px){
   .pxbx-grid{
     grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px){
+  .pxbx-grid{
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .pxbx-grid{
+    grid-template-columns: repeat(7, 1fr);
   }
 }

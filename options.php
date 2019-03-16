@@ -22,6 +22,7 @@ function pixbox_create_options_menu(){
 
 function register_pixbox_settings(){
   register_setting( 'pixbox-settings', 'password_expiry_age', array('default' => 30) );
+  register_setting( 'pixbox-settings', 'pixbox_page');
 }
 
 function pixbox_settings_page(){
@@ -33,9 +34,19 @@ function pixbox_settings_page(){
       <?php do_settings_sections('pixbox-settings'); ?>
       <table class="form-table">
         <tr valign="top">
-          <th scope="row">Password Expiry Age</th>
+          <th scope="row" for="password_expiry_age">Password Expiry Age</th>
           <td>
             <input type="number" name="password_expiry_age" value="<?= esc_attr(get_option('password_expiry_age')) ?>">
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row" for="pixbox_page">Pixbox Page</th>
+          <td>
+            <?php wp_dropdown_pages(array(
+              'name'             => 'pixbox_page',
+              'selected'         => get_option('pixbox_page', 0),
+              'show_option_none' => '--None--'
+            )); ?>
           </td>
         </tr>
       </table>
