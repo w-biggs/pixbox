@@ -60,9 +60,16 @@ jQuery(document).ready(function($){
     const albums = result.albums;
     const photos = result.photos;
     $('.pixbox-title').html(result.title);
+    // remove any existing album query, and remove any leftover trailing &s or ?s
+    const pageUrl = window.location.href.split('album=')[0].replace(/(?:\?|\&)+$/, "");
     if(result.parent !== result.id){
-      let href = '?';
+      let href = pageUrl;
       if(result.parent > 0){
+        if(href.includes('?')){
+          href += '&';
+        } else {
+          href += '?';
+        }
         href += 'album=' + result.parent;
       }
       if($('.pxbx-parent-link').length){
@@ -84,9 +91,14 @@ jQuery(document).ready(function($){
       ]
     } else {
       albums.forEach(function(album){
-        let href = '';
+        let href = pageUrl;
         if(!album.password){
-          href = 'album=' + album.id;
+          if(href.includes('?')){
+            href += '&';
+          } else {
+            href += '?';
+          }
+          href += 'album=' + album.id;
         }
         html = html.concat([
           '<li class="pxbx-item pxbx-album">',
@@ -114,9 +126,14 @@ jQuery(document).ready(function($){
       });
     }
     $(".pxbx-grid").html(html.join("\n"));
-    let url = window.location.href.split('?')[0];
+    let url = pageUrl;
     if(result.id > 0){
-      url += '?album=' + result.id;
+      if(url.includes('?')){
+        url += '&';
+      } else {
+        url += '?';
+      }
+      url += 'album=' + result.id;
     }
     history.pushState({},'',url);
   }

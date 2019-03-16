@@ -62,7 +62,7 @@ function pixbox_add_separator(){
 }
 
 function load_pixbox_albums_style($hook) {
-  wp_register_style('pixbox_albums_css', plugins_url('pixbox/css/albums.css'), array(), "0.1.0");
+  wp_register_style('pixbox_albums_css', plugins_url('css/albums.css', __FILE__), array(), "0.1.0");
 }
 add_action('admin_enqueue_scripts', 'load_pixbox_albums_style');
 add_action('wp_enqueue_scripts', 'load_pixbox_albums_style');
