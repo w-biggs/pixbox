@@ -82,14 +82,14 @@ td.column-title strong{
   opacity: 0.5;
 }
 
-.pxbx-album:hover .pxbx-tool-link,
-.pxbx-album:hover .pxbx-tool-link[href]{
+.pxbx-item:hover .pxbx-tool-link,
+.pxbx-item:hover .pxbx-tool-link[href]{
   opacity: 1;
 }
 
-.pxbx-album:hover .pxbx-tool-link:hover,
-.pxbx-album:hover .pxbx-tool-link:active,
-.pxbx-album:hover .pxbx-tool-link:focus{
+.pxbx-item:hover .pxbx-tool-link:hover,
+.pxbx-item:hover .pxbx-tool-link:active,
+.pxbx-item:hover .pxbx-tool-link:focus{
   opacity: 0.8;
 }
 

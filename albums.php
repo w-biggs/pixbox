@@ -116,6 +116,20 @@ wp_enqueue_style('pixbox_albums_css');
               <?= $photo->post_title ?>
             </span>
           </a>
+          <div class="pxbx-album-tools">
+            <input type="checkbox" autocomplete="off" name="delete_<?= $photo->ID ?>" id="delete_<?= $photo->ID ?>">
+            <label class="pxbx-tool-link pxbx-delete-link" for="delete_<?= $photo->ID ?>">Delete</label>
+            <span class="pxbx-delete-confirmation pxbx-tool-link">
+              Are you sure?
+              <button class="pxbx-tool-link pxbx-delete-link pxbx-delete-button" form="delete_form_<?= $photo->ID ?>">Yes</button>
+              /
+              <label class="pxbx-tool-link" for="delete_<?= $photo->ID ?>">No</label>
+            </span>
+            <form action="<?= admin_url('admin-post.php'); ?>" id="delete_form_<?= $photo->ID ?>" method="post">
+              <input type="hidden" name="action" value="pxbx_photo_delete">
+              <input type="hidden" name="photo_id" value="<?= $photo->ID ?>">
+            </form>
+          </div>
         </li>
       <?php endforeach; ?>
     <?php endif; ?>
