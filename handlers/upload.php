@@ -39,7 +39,6 @@ add_action('admin_post_pxbx_upload', function(){
                 'pixbox_albums' => $album->term_id
               )
             ), true);
-            var_dump($post);
             if(!is_wp_error($post)){
               $meta = update_post_meta(
                 $post,
