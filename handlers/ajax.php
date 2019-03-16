@@ -76,16 +76,27 @@ function pxbx_get_items(){
 function pxbx_check_password(){
   check_ajax_referer('pixbox', 'nonce');
   if(!isset($_POST['album']) || !isset($_POST['password'])){
-    wp_send_json_error("You must supply both an album and a password to check.");
+    wp_send_json_error(__("You must supply both an album and a password to check.", 'pixbox'));
     wp_die();
   }
   $album = $_POST['album'];
   $in_pass = $_POST['password'];
   $album_pass = get_term_meta($album,'album_pass',true);
+  $pass_date = intval(get_term_meta($album,'pass_date',true));
   if(empty($album_pass)){
-    wp_send_json_error("Given album doesn't have a password!");
+    wp_send_json_error(__("Given album doesn't have a password!", 'pixbox'));
     wp_die();
   }
-  wp_send_json_success($album_pass === $in_pass);
+  if($album_pass === $in_pass){
+    // 86400 seconds in a day
+    $max_pass_age = intval(get_option('password_expiry_age')) * 86400;
+    if((time() - $pass_date) > $max_pass_age){
+      wp_send_json_error(__("Password expired.", 'pixbox'));
+      wp_die();
+    }
+    wp_send_json_success();
+  } else {
+    wp_send_json_error(__("Incorrect password.", 'pixbox'));
+  }
   wp_die();
 }

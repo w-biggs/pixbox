@@ -44,10 +44,10 @@ jQuery(document).ready(function($){
     if(password !== null){
       $.post(passdata)
         .done(function(result){
-          if(result.data){
+          if(result.success){
             callback();
           } else {
-            alert("Incorrect password.");
+            alert(result.data);
           }
         })
         .fail(function(request){

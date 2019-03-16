@@ -26,11 +26,14 @@ add_action('admin_post_pxbx_album_edit', function(){
         ), $redir);
       }
       if(isset($_POST['passcheck'])){
-        if(isset($_POST['album_pass']) && !empty($_POST['album_pass'])){
+        $current_pass = get_term_meta($term->term_id, 'album_pass', true);
+        if(isset($_POST['album_pass']) && !empty($_POST['album_pass']) && ($_POST['album_pass'] !== $current_pass)){
           update_term_meta($term->term_id, 'album_pass', $_POST['album_pass']);
+          update_term_meta($term->term_id, 'pass_date', time());
         }
       } else {
         delete_term_meta($term->term_id, 'album_pass');
+        delete_term_meta($term->term_id, 'pass_date');
       }
     } else {
       $redir = add_query_arg(array(

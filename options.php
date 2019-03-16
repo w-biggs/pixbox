@@ -35,10 +35,9 @@ function pixbox_settings_page(){
       <?php do_settings_sections('pixbox-settings'); ?>
       <table class="form-table">
         <tr valign="top">
-          <th scope="row" for="password_expiry_age">Password Expiry Age</th>
+          <th scope="row" for="password_expiry_age">Password Expiry Age (in days)</th>
           <td>
             <input type="number" name="password_expiry_age" value="<?= esc_attr(get_option('password_expiry_age')) ?>">
-            <p class="description">Currently does nothing.</p>
           </td>
         </tr>
         <tr valign="top">
