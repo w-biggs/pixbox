@@ -16,7 +16,7 @@ function pixbox_create_menu(){
     'manage_options',
     'pixbox/albums.php',
     '',
-    plugins_url('pixbox/images/icon.png'),
+    'dashicons-grid-view',
     31
   );
   add_submenu_page(
