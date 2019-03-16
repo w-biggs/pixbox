@@ -129,7 +129,7 @@ if(!empty($_REQUEST['album'])){
         photos.forEach(function(photo){
           html = html.concat([
             '<li class="pxbx-item pxbx-photo">',
-              '<a href="' + photo.fullres + '" class="pxbx-item-anchor pxbx-photo-anchor">',
+              '<a href="' + photo.fullres + '" class="pxbx-item-anchor pxbx-photo-anchor" download>',
                 '<div class="pxbx-photo-thumb-container">',
                   '<img src="' + photo.fullres + '" alt="' + photo.name + '" class="pxbx-photo-thumb">',
                 '</div>',
