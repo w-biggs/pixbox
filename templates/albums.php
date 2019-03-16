@@ -27,7 +27,7 @@ wp_localize_script('pixbox_front_js', 'phpdata', array(
 ));
 wp_enqueue_script('pixbox_front_js');
 ?>
-<div class="wrap">
+<div class="<?= esc_attr(get_option('pixbox_wrapper_classes')) ?>">
   <div class="pixbox-front">
     <h1 class="pixbox-title">Albums</h1>
     <ul class="pxbx-grid">

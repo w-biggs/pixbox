@@ -33,6 +33,7 @@ add_action('admin_post_pxbx_album_new', function(){
       ), $redir);
       if(isset($_POST['passcheck']) && isset($_POST['album_pass'])){
         update_term_meta($term['term_id'], 'album_pass', $_POST['album_pass']);
+        update_term_meta($term['term_id'], 'pass_date', time());
       }
     }
   } else {

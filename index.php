@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pixbox
  * Plugin URI: https://github.com/w-biggs/pixbox
- * Version: 0.3.0
+ * Version: 0.4.0
  * Description: A private photo albums plugin.
  * Author: W Biggs
  * License: GPL3
@@ -16,6 +16,7 @@ include plugin_dir_path( __FILE__ ) . 'options.php';
 include plugin_dir_path( __FILE__ ) . 'post_tax.php';
 include plugin_dir_path( __FILE__ ) . 'front_end.php';
 include plugin_dir_path( __FILE__ ) . 'handlers/upload.php';
+include plugin_dir_path( __FILE__ ) . 'handlers/photo_delete.php';
 include plugin_dir_path( __FILE__ ) . 'handlers/album_new.php';
 include plugin_dir_path( __FILE__ ) . 'handlers/album_edit.php';
 include plugin_dir_path( __FILE__ ) . 'handlers/album_delete.php';
