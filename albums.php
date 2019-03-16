@@ -54,18 +54,18 @@ wp_enqueue_style('pixbox_albums_css');
     esc_url(add_query_arg(array(
       'action' => 'new',
       'parent_ID' => $this_album
-    ), admin_url("admin.php?page=pixbox%2Falbum.php"))) ?>"
+    ), admin_url("admin.php?page=" . get_pxbx_dir() . "%2Falbum.php"))) ?>"
     class="page-title-action"><?= $add_new ?></a>
   <?php if(!is_null($album_obj)): ?>
     <a href="<?=
         esc_url(add_query_arg(array(
           'album' => $this_album
-        ), admin_url('admin.php?page=pixbox%2Fupload.php')))
+        ), admin_url('admin.php?page=' . get_pxbx_dir() . '%2Fupload.php')))
       ?>" class="page-title-action"><?= __('Upload Photos', 'pixbox'); ?></a>
     <a class="pxbx-parent-link" href="<?=
         esc_url(add_query_arg(array(
           'album_ID' => $parent
-        ), admin_url('admin.php?page=pixbox%2Falbums.php')))
+        ), admin_url('admin.php?page=' . get_pxbx_dir() . '%2Falbums.php')))
       ?>">&lt; <?= $parent_name ?></a>
   <?php endif; ?>
   <hr class="wp-header-end">
@@ -78,7 +78,7 @@ wp_enqueue_style('pixbox_albums_css');
           <a href="<?=
               esc_url(add_query_arg(array(
                 'album_ID' => $album->term_id
-              ), admin_url('admin.php?page=pixbox%2Falbums.php')))
+              ), admin_url('admin.php?page=' . get_pxbx_dir() . '%2Falbums.php')))
             ?>" class="pxbx-item-anchor pxbx-album-anchor">
             <span class="pxbx-item-title">
               <?= $album->name ?>
@@ -90,7 +90,7 @@ wp_enqueue_style('pixbox_albums_css');
               href="<?= esc_url(add_query_arg(array(
                   'action' => 'edit',
                   'album_ID' => $album->term_id
-                ), admin_url('admin.php?page=pixbox%2Falbum.php'))) ?>"
+                ), admin_url('admin.php?page=' . get_pxbx_dir() . '%2Falbum.php'))) ?>"
               >Edit</a>
             <label class="pxbx-tool-link pxbx-delete-link" for="delete_<?= $album->term_id ?>">Delete</label>
             <span class="pxbx-delete-confirmation pxbx-tool-link">

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pixbox
  * Plugin URI: https://github.com/w-biggs/pixbox
- * Version: 0.4.2
+ * Version: 0.4.3
  * Description: A private photo albums plugin.
  * Author: W Biggs
  * License: GPL3
@@ -11,6 +11,7 @@
  */
 
 // for hashing album passwords
+include plugin_dir_path( __FILE__ ) . 'utils.php';
 include plugin_dir_path( __FILE__ ) . 'menu.php';
 include plugin_dir_path( __FILE__ ) . 'options.php';
 include plugin_dir_path( __FILE__ ) . 'post_tax.php';

@@ -8,7 +8,7 @@
 
 add_action('admin_post_pxbx_upload', function(){
   $redir = add_query_arg(array( 
-    'page' => 'pixbox%2Falbums.php',
+    'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'upload'
   ), 'admin.php');
   if(isset($_REQUEST['album'])){
