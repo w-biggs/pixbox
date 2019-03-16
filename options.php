@@ -45,7 +45,8 @@ function pixbox_settings_page(){
             <?php wp_dropdown_pages(array(
               'name'             => 'pixbox_page',
               'selected'         => get_option('pixbox_page', 0),
-              'show_option_none' => '--None--'
+              'show_option_none' => '--None--',
+              'post_status'      => array('publish', 'draft')
             )); ?>
           </td>
         </tr>
