@@ -2,7 +2,7 @@
 Contributors: wilsonbiggs
 Tags: photo album, photos, gallery, upload, photography
 Donate link: https://paypal.me/wbiggs1
-Tested up to: 5.1
+Tested up to: 5.1.1
 Requires at least: 4.5
 Requires PHP: 5.5.38
 License: GPL3
