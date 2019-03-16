@@ -30,7 +30,7 @@ function pixbox_page_template($template) {
 
   $pixbox_page = get_option('pixbox_page', 0);
 
-	if(is_page($pixbox_page)){
+	if(!empty($pixbox_page) && is_page($pixbox_page)){
 		$new_template = plugin_dir_path( __FILE__ ) . 'templates/albums.php';
 		if (!empty($new_template)) {
 			return $new_template;
