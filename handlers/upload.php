@@ -44,7 +44,7 @@ add_action('admin_post_pxbx_upload', function(){
               $meta = update_post_meta(
                 $post,
                 'fullres',
-                preg_replace("/\/app\/public/",'',"$upload_dir/$name")
+                str_replace($_SERVER['DOCUMENT_ROOT'],'',"$upload_dir/$name")
               );
             } else {
               $redir = add_query_arg(array(

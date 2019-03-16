@@ -16,7 +16,7 @@ function pixbox_create_menu(){
     'manage_options',
     'pixbox/albums.php',
     '',
-    plugins_url('pixbox/images/icon.png'),
+    'dashicons-grid-view',
     31
   );
   add_submenu_page(
@@ -62,9 +62,7 @@ function pixbox_add_separator(){
 }
 
 function load_pixbox_albums_style($hook) {
-  if($hook != 'pixbox/albums.php') {
-    return;
-  }
-  wp_enqueue_style('pixbox_albums_css', plugins_url('pixbox/css/albums.css'));
+  wp_register_style('pixbox_albums_css', plugins_url('pixbox/css/albums.css'), array(), "0.1.0");
 }
 add_action('admin_enqueue_scripts', 'load_pixbox_albums_style');
+add_action('wp_enqueue_scripts', 'load_pixbox_albums_style');

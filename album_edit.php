@@ -21,7 +21,7 @@ if (empty($_REQUEST['album_ID'])) {
 }
 
 $term = get_term($_REQUEST['album_ID'], $taxonomy);
-$term_meta = get_term_meta($term->term_id, '');
+$term_meta = get_term_meta($term->term_id);
 
 if (!empty($_REQUEST['parent_ID'])) {
   $parent = $_REQUEST['parent_ID'];
@@ -77,7 +77,7 @@ if (!current_user_can('edit_posts')){
       <th scope="row"><label for="album_pass"><?= __('Password') ?></label></th>
       <td>
         <?php if(array_key_exists('album_pass', $term_meta)): ?>
-          <input type="text" name="album_pass" id="album_pass">
+          <input type="text" name="album_pass" id="album_pass" value="<?= $term_meta['album_pass'][0] ?>">
           <p class="description">To change the password, type in a new one here.</p>
         <?php else: ?>
           <input type="text" name="album_pass" id="album_pass" value="<?= wp_generate_password(); ?>">
