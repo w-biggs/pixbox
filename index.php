@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pixbox
  * Plugin URI: https://github.com/w-biggs/pixbox
- * Version: 0.3.0
+ * Version: 0.3.2
  * Description: A private photo albums plugin.
  * Author: W Biggs
  * License: GPL3
