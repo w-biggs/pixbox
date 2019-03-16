@@ -6,6 +6,11 @@
  * @since 0.3.0
  */
 
+// Register the necessary scripts
+add_action('wp_enqueue_scripts', function(){
+	wp_register_script('pixbox_front_js', plugins_url('js/front_end.js', __FILE__), array('jquery'));
+});
+
 // Adds "Pixbox Page" state to Pixbox page.
 add_filter('display_post_states', 'pixbox_post_states', 10, 2);
 
