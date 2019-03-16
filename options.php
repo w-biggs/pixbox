@@ -9,12 +9,13 @@
 add_action('admin_menu', 'pixbox_create_options_menu');
 
 function pixbox_create_options_menu(){
+  $dir = plugin_basename(__DIR__);
   add_submenu_page(
-    'pixbox/albums.php',
+    $dir . '/albums.php',
     'Pixbox Settings',
     'Settings',
     'manage_options',
-    'pixbox/options.php',
+    $dir . '/options.php',
     'pixbox_settings_page'
   );
   add_action( 'admin_init', 'register_pixbox_settings' );
