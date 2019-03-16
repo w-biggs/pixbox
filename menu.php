@@ -9,12 +9,13 @@
 add_action('admin_menu', 'pixbox_create_menu');
 
 function pixbox_create_menu(){
+  $dir = plugin_basename(__DIR__);
   pixbox_add_separator();
   add_menu_page(
     'Pixbox',
     'Pixbox',
     'manage_options',
-    'pixbox/albums.php',
+    $dir . '/albums.php',
     '',
     'dashicons-grid-view',
     31
@@ -24,23 +25,23 @@ function pixbox_create_menu(){
     'Pixbox Albums',
     'Albums',
     'manage_options',
-    'pixbox/albums.php',
+    $dir . '/albums.php',
     ''
   );
   add_submenu_page(
-    'pixbox/albums.php',
+    $dir . '/albums.php',
     'Add New Pixbox Album',
     'Add New Album',
     'edit_posts',
-    'pixbox/album.php',
+    $dir . '/album.php',
     ''
   );
   add_submenu_page(
-    'pixbox/albums.php',
+    $dir . '/albums.php',
     'Upload Photos',
     'Upload Photos',
     'edit_posts',
-    'pixbox/upload.php',
+    $dir . '/upload.php',
     ''
   );
 }
