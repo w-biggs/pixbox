@@ -7,7 +7,7 @@
  */
 add_action('admin_post_pxbx_album_edit', function(){
   $redir = add_query_arg(array( 
-    'page' => 'pixbox%2Falbums.php',
+    'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'edit'
   ), 'admin.php');
   if(isset($_POST['album_ID'])){

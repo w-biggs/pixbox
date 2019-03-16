@@ -11,6 +11,8 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A private photo albums plugin.
 
 == Changelog ==
+- 0.4.3:
+  - FIX: Everything should now work correctly when the plugin directory is not /pixbox/. EVERYTHING. (I hope.)
 - 0.4.2:
   - FIX: Admin nav links now work correctly when the plugin directory is not /pixbox/.
 - 0.4.1:
