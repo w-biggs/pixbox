@@ -50,14 +50,12 @@ function pxbx_get_items(){
     'title' => $title,
     'parent' => $parent,
     'parentName' => $parent_name,
+    'password' => !empty(get_term_meta($this_album,'album_pass')),
     'albums' => array(),
     'photos' => array()
   );
   foreach ($albums as $album) {
-    $password = false;
-    if(!empty(get_term_meta($album->term_id,'album_pass'))){
-      $password = true;
-    }
+    $password = !empty(get_term_meta($album->term_id,'album_pass'));
     $items['albums'][] = array(
       'name'     => $album->name,
       'id'       => $album->term_id,

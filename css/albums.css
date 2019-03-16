@@ -28,7 +28,7 @@ td.column-title strong{
   background-color: rgba(0,0,0,0.5);
 }
 
-.pxbx-empty{
+.pxbx-empty, .pxbx-nojs{
   color: white;
 }
 
