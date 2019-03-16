@@ -23,6 +23,7 @@ function pixbox_create_options_menu(){
 function register_pixbox_settings(){
   register_setting( 'pixbox-settings', 'password_expiry_age', array('default' => 30) );
   register_setting( 'pixbox-settings', 'pixbox_page');
+  register_setting( 'pixbox-settings', 'pixbox_wrapper_classes');
 }
 
 function pixbox_settings_page(){
@@ -37,6 +38,7 @@ function pixbox_settings_page(){
           <th scope="row" for="password_expiry_age">Password Expiry Age</th>
           <td>
             <input type="number" name="password_expiry_age" value="<?= esc_attr(get_option('password_expiry_age')) ?>">
+            <p class="description">Currently does nothing.</p>
           </td>
         </tr>
         <tr valign="top">
@@ -48,6 +50,13 @@ function pixbox_settings_page(){
               'show_option_none' => '--None--',
               'post_status'      => array('publish', 'draft')
             )); ?>
+          </td>
+        </tr>
+        <tr valign="top">
+          <th scope="row" for="pixbox_wrapper_classes">Pixbox Wrapper Classes</th>
+          <td>
+            <input type="text" name="pixbox_wrapper_classes" value="<?= esc_attr(get_option('pixbox_wrapper_classes')) ?>">
+            <p class="description">Any CSS classes to add to the Pixbox wrapper div on the front-end.</p>
           </td>
         </tr>
       </table>
