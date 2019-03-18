@@ -10,7 +10,6 @@
  * Text Domain: pixbox
  */
 
-// for hashing album passwords
 include plugin_dir_path( __FILE__ ) . 'utils.php';
 include plugin_dir_path( __FILE__ ) . 'menu.php';
 include plugin_dir_path( __FILE__ ) . 'options.php';
