@@ -15,6 +15,17 @@ if(!empty($_REQUEST['album'])){
   $this_album = $_REQUEST['album'];
 }
 
+// Add node to admin bar
+add_action( 'admin_bar_menu', 'pixbox_node', 999);
+
+function pixbox_node($wp_admin_bar){
+  $wp_admin_bar->add_node(array(
+    "id" => "pixbox_node",
+    "title" => "Pixbox",
+    "href" => admin_url('admin.php?page=' . get_pxbx_dir() . '%2Falbums.php')
+  ));
+}
+
 // nonce for ajax requests
 $ajax_nonce = wp_create_nonce('pixbox');
 
