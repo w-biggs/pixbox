@@ -94,6 +94,7 @@ function pxbx_check_password(){
       wp_send_json_error(__("Password expired.", 'pixbox'));
       wp_die();
     }
+    setcookie("album_pass", $in_pass, strtotime('+1 hour'), '/');
     wp_send_json_success();
   } else {
     wp_send_json_error(__("Incorrect password.", 'pixbox'));

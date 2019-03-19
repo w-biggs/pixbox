@@ -21,6 +21,7 @@ $ajax_nonce = wp_create_nonce('pixbox');
 // Load the necessary scripts
 wp_localize_script('pixbox_front_js', 'phpdata', array(
   'ajaxurl' => admin_url('admin-ajax.php'),
+  'dlurl' => plugins_url('../handlers/download.php', __FILE__),
   'nonce' => $ajax_nonce,
   'notFoundText' => __('No albums or photos found.','pixbox'),
   'thisAlbum' => $this_album

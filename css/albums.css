@@ -38,6 +38,16 @@ td.column-title strong{
   flex-direction: column;
 }
 
+.pxbx-dl{
+  opacity: 0.5;
+  transition: opacity 0.05s;
+}
+
+.pxbx-dl:hover{
+  opacity: 1;
+  transition: opacity 0.1s;
+}
+
 .pxbx-item-anchor[href]{
   width: 100%;
   height: 100%;
@@ -59,6 +69,17 @@ td.column-title strong{
 
 .pxbx-album-anchor::before{
   content: url('../images/folder.svg');
+  flex:1;
+  filter: drop-shadow( 3px 3px 3px rgba(0, 0, 0, .4));
+  transition: filter 0.1s;
+}
+
+.pxbx-dl-anchor::before{
+  content: '';
+  background-image: url('../images/download.svg');
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center center;
   flex:1;
   filter: drop-shadow( 3px 3px 3px rgba(0, 0, 0, .4));
   transition: filter 0.1s;
@@ -131,9 +152,16 @@ td.column-title strong{
   display: inline;
 }
 
+.pxbx-item-title{
+  line-height: 1.2;
+}
+
 .pxbx-photo-title{
   font-size: 0.75em;
-  line-height: 1.2;
+}
+
+.pxbx-dl-title{
+  font-size: 0.85em;
 }
 
 .pxbx-photo-thumb-container{

@@ -124,6 +124,17 @@ jQuery(document).ready(function($){
           '</li>'
         ])
       });
+      if(photos.length > 0){
+        html = html.concat([
+          '<li class="pxbx-item pxbx-dl">',
+            '<a href="' + phpdata.dlurl + '?album=' + result.id + '" class="pxbx-item-anchor pxbx-dl-anchor">',
+              '<span class="pxbx-item-title pxbx-dl-title">',
+                'Download all photos',
+              '</span>',
+            '</a>',
+          '</li>'
+        ])
+      }
     }
     $(".pxbx-grid").html(html.join("\n"));
     let url = pageUrl;
