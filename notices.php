@@ -33,7 +33,7 @@ function pixbox_admin_notices(){
             $msg = __("An error occurred while uploading the photo(s): ", "pixbox");
             break;
         }
-        $msg = ": " + $_GET['error'];
+        $msg = ": " . $_GET['error'];
       } else {
         $class = "notice-success";
         switch($_GET['action']) {
