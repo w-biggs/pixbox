@@ -10,7 +10,7 @@ add_action('admin_notices', 'pixbox_admin_notices');
 
 function pixbox_admin_notices(){
   $screen = get_current_screen();
-  if($screen->id === 'pixbox/albums'){
+  if($screen->id === 'pixbox/albums' && !empty($_SERVER['HTTP_REFERER'])){
     $action;
     if(isset($_GET['action'])){
       $action = $_GET['action'];
@@ -33,7 +33,7 @@ function pixbox_admin_notices(){
             $msg = __("An error occurred while uploading the photo(s): ", "pixbox");
             break;
         }
-        $msg = ": " . $_GET['error'];
+        $msg .= $_GET['error'];
       } else {
         $class = "notice-success";
         switch($_GET['action']) {
@@ -53,12 +53,12 @@ function pixbox_admin_notices(){
             $msg = __("Successfully uploaded the photo(s).", "pixbox");
             break;
         }
-        ?>
-        <div class="notice <?= $class ?>">
-          <p><?= $msg ?></p>
-        </div>
-        <?php
       }
+      ?>
+      <div class="notice <?= $class ?>">
+        <p><?= $msg ?></p>
+      </div>
+      <?php
     }
   }
 }

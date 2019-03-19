@@ -17,7 +17,7 @@ add_action('admin_post_pxbx_upload', function(){
     $redir = add_query_arg(array( 
       'album_ID' => $album->term_id
     ), $redir);
-    if(!empty($_FILES['upload'])){
+    if(!empty($_FILES['upload']) && $_FILES['upload']['error'][0] === 0){
       $files = $_FILES['upload'];
       $mkdir = wp_mkdir_p($upload_dir);
       if($mkdir){
@@ -63,6 +63,37 @@ add_action('admin_post_pxbx_upload', function(){
           'error' => urlencode('Failed to create directory.')
         ), $redir);
       }
+    } else {
+      $errmsg = "";
+      switch($_FILES['upload']['error'][0]){
+        case 1:
+          $errmsg = "The uploaded file exceeds the upload_max_filesize directive in php.ini.";
+          break;
+        case 2:
+          $errmsg = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.";
+          break;
+        case 3:
+          $errmsg = "The uploaded file was only partially uploaded.";
+          break;
+        case 4:
+          $errmsg = "No file was uploaded.";
+          break;
+        case 6:
+          $errmsg = "Missing a temporary folder.";
+          break;
+        case 7:
+          $errmsg = "Failed to write file to disk.";
+          break;
+        case 8:
+          $errmsg = "File upload stopped by extension.";
+          break;
+        default:
+          $errmsg = "Unknown upload error.";
+          break; 
+      }
+      $redir = add_query_arg(array( 
+        'error' => urlencode($errmsg)
+      ), $redir);
     }
   }
   wp_safe_redirect($redir);
