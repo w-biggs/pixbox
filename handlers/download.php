@@ -24,9 +24,9 @@ $redir = add_query_arg(array(
   'action' => 'download'
 ), $redir_url);
 
-if(isset($_GET['album'])){
+if(!empty($_GET['album'])){
   $album = get_term($_GET['album'],'pixbox_albums');
-  if($_COOKIE['album_' . $album->term_id . '_pass']){
+  if(!empty($_COOKIE['album_' . $album->term_id . '_pass'])){
     $in_pass = $_COOKIE['album_' . $album->term_id . '_pass'];
   } else {
     $in_pass = false;

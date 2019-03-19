@@ -10,7 +10,7 @@ add_action('admin_post_pxbx_album_delete', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'delete'
   ), 'admin.php');
-  if(isset($_POST['album_id'])){
+  if(!empty($_POST['album_id'])){
     $album_id = $_POST['album_id'];
     $album = get_term($album_id, 'pixbox_albums');
     $redir = add_query_arg(array( 

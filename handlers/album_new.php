@@ -10,11 +10,11 @@ add_action('admin_post_pxbx_album_new', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'add'
   ), 'admin.php');
-  if(isset($_POST['title'])){
+  if(!empty($_POST['title'])){
     $title = $_POST['title'];
     $parent = 0;
     $pass = null;
-    if(isset($_POST['parent'])){
+    if(!empty($_POST['parent'])){
       $parent = $_POST['parent'];
       $redir = add_query_arg(array(
         'album_ID' => $parent,
@@ -31,7 +31,7 @@ add_action('admin_post_pxbx_album_new', function(){
       $redir = add_query_arg(array(
         'termid' => $term['term_id'],
       ), $redir);
-      if(isset($_POST['passcheck']) && isset($_POST['album_pass'])){
+      if(!empty($_POST['passcheck']) && !empty($_POST['album_pass'])){
         update_term_meta($term['term_id'], 'album_pass', $_POST['album_pass']);
         update_term_meta($term['term_id'], 'pass_date', time());
       }

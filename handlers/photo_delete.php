@@ -10,7 +10,7 @@ add_action('admin_post_pxbx_photo_delete', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'delete_photo'
   ), 'admin.php');
-  if(isset($_POST['photo_id'])){
+  if(!empty($_POST['photo_id'])){
     $photo_id = $_POST['photo_id'];
     $photo = get_post($photo_id);
     if(!is_null($photo)){

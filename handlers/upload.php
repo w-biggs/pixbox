@@ -11,13 +11,13 @@ add_action('admin_post_pxbx_upload', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'upload'
   ), 'admin.php');
-  if(isset($_REQUEST['album'])){
+  if(!empty($_REQUEST['album'])){
     $album = get_term($_REQUEST['album'], 'pixbox_albums');
     $upload_dir = wp_get_upload_dir()['basedir'] . "/pixbox/" . $album->term_id;
     $redir = add_query_arg(array( 
       'album_ID' => $album->term_id
     ), $redir);
-    if(isset($_FILES['upload'])){
+    if(!empty($_FILES['upload'])){
       $files = $_FILES['upload'];
       $mkdir = wp_mkdir_p($upload_dir);
       if($mkdir){
