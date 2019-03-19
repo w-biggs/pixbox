@@ -30,30 +30,33 @@ jQuery(document).ready(function($){
       });
   }
 
-  const checkPass = function(id, callback){
-    const password = window.prompt("Enter the password for this album.");
+  const checkPass = function(id, callback, password = null){
     const passdata = {
       url: phpdata.ajaxurl,
       data: {
         action: 'pxbx_check_password',
         nonce: phpdata.nonce,
-        album: id,
-        password: password
+        album: id
       }
     };
     if(password !== null){
-      $.post(passdata)
-        .done(function(result){
-          if(result.success){
-            callback();
+      passdata.data.password = password;
+    }
+    $.post(passdata)
+      .done(function(result){
+        if(result.success){
+          callback();
+        } else {
+          if(password === null){
+            checkPass(id, callback, prompt('Enter the password for this album.'));
           } else {
             alert(result.data);
           }
-        })
-        .fail(function(request){
-          console.error("AJAX pass request failed: " + request.status + " - " + request.statusText);
-        });
-    }
+        }
+      })
+      .fail(function(request){
+        console.error("AJAX pass request failed: " + request.status + " - " + request.statusText);
+      });
   }
 
   const renderAlbum = function(result){

@@ -75,12 +75,17 @@ function pxbx_get_items(){
 
 function pxbx_check_password(){
   check_ajax_referer('pixbox', 'nonce');
-  if(!isset($_POST['album']) || !isset($_POST['password'])){
+  $in_pass = false;
+  if(isset($_POST['password'])){
+    $in_pass = $_POST['password'];
+  } elseif(isset($_COOKIE['album_pass'])){
+    $in_pass = $_COOKIE['album_pass'];
+  }
+  if(!isset($_POST['album']) || !$in_pass){
     wp_send_json_error(__("You must supply both an album and a password to check.", 'pixbox'));
     wp_die();
   }
   $album = $_POST['album'];
-  $in_pass = $_POST['password'];
   $album_pass = get_term_meta($album,'album_pass',true);
   $pass_date = intval(get_term_meta($album,'pass_date',true));
   if(empty($album_pass)){
