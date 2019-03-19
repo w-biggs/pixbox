@@ -11,6 +11,17 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A private photo albums plugin.
 
 == Changelog ==
+- 0.5:
+  - ADD: Error and success messages are now rendered as notices.
+  - ADD: The "add password" field is now greyed out when the password checkbox isn't checked.
+  - ADD: Albums can now be downloaded in batch.
+  - ADD: Store user login for an hour so they don't need to re-enter the password each time.
+  - ADD: Albums' photos are deleted when the album is deleted.
+  - ADD: A link to the Pixbox admin page is now visible in the admin bar on the Pixbox page.
+  - ADD: File upload errors are now more descriptive.
+  - FIX: Handlers now use !empty instead of isset, so empty textboxes are correctly caught.
+  - FIX: Error messages are now escaped before being passed as query strings.
+  - FIX: Now using wp_safe_redirect instead of wp_redirect.
 - 0.4.3:
   - FIX: Everything should now work correctly when the plugin directory is not /pixbox/. EVERYTHING. (I hope.)
 - 0.4.2:
