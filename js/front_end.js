@@ -30,30 +30,33 @@ jQuery(document).ready(function($){
       });
   }
 
-  const checkPass = function(id, callback){
-    const password = window.prompt("Enter the password for this album.");
+  const checkPass = function(id, callback, password = null){
     const passdata = {
       url: phpdata.ajaxurl,
       data: {
         action: 'pxbx_check_password',
         nonce: phpdata.nonce,
-        album: id,
-        password: password
+        album: id
       }
     };
     if(password !== null){
-      $.post(passdata)
-        .done(function(result){
-          if(result.success){
-            callback();
+      passdata.data.password = password;
+    }
+    $.post(passdata)
+      .done(function(result){
+        if(result.success){
+          callback();
+        } else {
+          if(password === null){
+            checkPass(id, callback, prompt('Enter the password for this album.'));
           } else {
             alert(result.data);
           }
-        })
-        .fail(function(request){
-          console.error("AJAX pass request failed: " + request.status + " - " + request.statusText);
-        });
-    }
+        }
+      })
+      .fail(function(request){
+        console.error("AJAX pass request failed: " + request.status + " - " + request.statusText);
+      });
   }
 
   const renderAlbum = function(result){
@@ -124,6 +127,17 @@ jQuery(document).ready(function($){
           '</li>'
         ])
       });
+      if(photos.length > 0){
+        html = html.concat([
+          '<li class="pxbx-item pxbx-dl">',
+            '<a href="' + phpdata.dlurl + '?album=' + result.id + '" class="pxbx-item-anchor pxbx-dl-anchor">',
+              '<span class="pxbx-item-title pxbx-dl-title">',
+                'Download all photos',
+              '</span>',
+            '</a>',
+          '</li>'
+        ])
+      }
     }
     $(".pxbx-grid").html(html.join("\n"));
     let url = pageUrl;

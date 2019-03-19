@@ -11,13 +11,13 @@ add_action('admin_post_pxbx_upload', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'upload'
   ), 'admin.php');
-  if(isset($_REQUEST['album'])){
+  if(!empty($_REQUEST['album'])){
     $album = get_term($_REQUEST['album'], 'pixbox_albums');
     $upload_dir = wp_get_upload_dir()['basedir'] . "/pixbox/" . $album->term_id;
     $redir = add_query_arg(array( 
       'album_ID' => $album->term_id
     ), $redir);
-    if(isset($_FILES['upload'])){
+    if(!empty($_FILES['upload']) && $_FILES['upload']['error'][0] === 0){
       $files = $_FILES['upload'];
       $mkdir = wp_mkdir_p($upload_dir);
       if($mkdir){
@@ -39,7 +39,6 @@ add_action('admin_post_pxbx_upload', function(){
                 'pixbox_albums' => $album->term_id
               )
             ), true);
-            var_dump($post);
             if(!is_wp_error($post)){
               $meta = update_post_meta(
                 $post,
@@ -48,24 +47,55 @@ add_action('admin_post_pxbx_upload', function(){
               );
             } else {
               $redir = add_query_arg(array(
-                'error' => $post->get_error_message(),
+                'error' => urlencode($post->get_error_message()),
               ), $redir);
               break;
             }
           } else {
             $redir = add_query_arg(array(
-              'error' => "move failed - invalid filename",
+              'error' => urlencode('Move failed - invalid filename.'),
             ), $redir);
             break;
           }
         }
       } else {
         $redir = add_query_arg(array( 
-          'error' => 'failed to create directory'
+          'error' => urlencode('Failed to create directory.')
         ), $redir);
       }
+    } else {
+      $errmsg = "";
+      switch($_FILES['upload']['error'][0]){
+        case 1:
+          $errmsg = "The uploaded file exceeds the upload_max_filesize directive in php.ini.";
+          break;
+        case 2:
+          $errmsg = "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.";
+          break;
+        case 3:
+          $errmsg = "The uploaded file was only partially uploaded.";
+          break;
+        case 4:
+          $errmsg = "No file was uploaded.";
+          break;
+        case 6:
+          $errmsg = "Missing a temporary folder.";
+          break;
+        case 7:
+          $errmsg = "Failed to write file to disk.";
+          break;
+        case 8:
+          $errmsg = "File upload stopped by extension.";
+          break;
+        default:
+          $errmsg = "Unknown upload error.";
+          break; 
+      }
+      $redir = add_query_arg(array( 
+        'error' => urlencode($errmsg)
+      ), $redir);
     }
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });

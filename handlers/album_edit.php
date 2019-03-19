@@ -10,16 +10,16 @@ add_action('admin_post_pxbx_album_edit', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'edit'
   ), 'admin.php');
-  if(isset($_POST['album_ID'])){
+  if(!empty($_POST['album_ID'])){
     $redir = add_query_arg(array(
       'termid' => $term['term_id'],
     ), $redir);
-    if(isset($_POST['title'])){
+    if(!empty($_POST['title'])){
       $title = $_POST['title'];
       $term = get_term($_POST['album_ID'], 'pixbox_albums');
       $parent = 0;
       $pass = null;
-      if(isset($_POST['parent'])){
+      if(!empty($_POST['parent'])){
         $parent = $_POST['parent'];
         $redir = add_query_arg(array(
           'album_ID' => $parent,
@@ -27,7 +27,7 @@ add_action('admin_post_pxbx_album_edit', function(){
       }
       if(isset($_POST['passcheck'])){
         $current_pass = get_term_meta($term->term_id, 'album_pass', true);
-        if(isset($_POST['album_pass']) && !empty($_POST['album_pass']) && ($_POST['album_pass'] !== $current_pass)){
+        if(!empty($_POST['album_pass']) && ($_POST['album_pass'] !== $current_pass)){
           update_term_meta($term->term_id, 'album_pass', $_POST['album_pass']);
           update_term_meta($term->term_id, 'pass_date', time());
         }
@@ -37,14 +37,14 @@ add_action('admin_post_pxbx_album_edit', function(){
       }
     } else {
       $redir = add_query_arg(array(
-        'error' => 'No title was given.',
+        'error' => urlencode('No title was given.'),
       ), $redir);
     }
   } else {
     $redir = add_query_arg(array(
-      'error' => 'No album ID was given.',
+      'error' => urlencode('No album ID was given.'),
     ), $redir);
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });

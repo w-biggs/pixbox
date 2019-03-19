@@ -10,7 +10,7 @@ add_action('admin_post_pxbx_photo_delete', function(){
     'page' => get_pxbx_dir() . '%2Falbums.php',
     'action' => 'delete_photo'
   ), 'admin.php');
-  if(isset($_POST['photo_id'])){
+  if(!empty($_POST['photo_id'])){
     $photo_id = $_POST['photo_id'];
     $photo = get_post($photo_id);
     if(!is_null($photo)){
@@ -22,19 +22,19 @@ add_action('admin_post_pxbx_photo_delete', function(){
       $deletion = wp_delete_post($photo_id, true);
       if(!$deletion){
         $redir = add_query_arg(array(
-          'error' => 'Could not delete photo.',
+          'error' => urlencode('Could not delete photo.'),
         ), $redir);
       }
     } else {
       $redir = add_query_arg(array(
-        'error' => 'No photo was found with the given ID.',
+        'error' => urlencode('No photo was found with the given ID.'),
       ), $redir);
     }
   } else {
     $redir = add_query_arg(array(
-      'error' => 'No photo ID was given.',
+      'error' => urlencode('No photo ID was given.'),
     ), $redir);
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });
