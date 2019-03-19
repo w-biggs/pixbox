@@ -38,7 +38,7 @@ add_action('admin_post_pxbx_album_delete', function(){
     $deletion = wp_delete_term($album_id, 'pixbox_albums');
     if(is_wp_error($deletion)){
       $redir = add_query_arg(array(
-        'error' => $deletion->get_error_message(),
+        'error' => urlencode($deletion->get_error_message()),
       ), $redir);
     } else {
       $album_del_error = false;
@@ -47,7 +47,7 @@ add_action('admin_post_pxbx_album_delete', function(){
           $album_deletion = wp_delete_term($sub_album->term_id, 'pixbox_albums');
           if(is_wp_error($album_deletion)){
             $redir = add_query_arg(array(
-              'error' => $album_deletion->get_error_message(),
+              'error' => urlencode($album_deletion->get_error_message()),
             ), $redir);
             $album_del_error = true;
           } else {
@@ -61,7 +61,7 @@ add_action('admin_post_pxbx_album_delete', function(){
           $photo_deletion = wp_delete_post($photo, true);
           if(is_wp_error($photo_deletion)){
             $redir = add_query_arg(array(
-              'error' => $photo_deletion->get_error_message(),
+              'error' => urlencode($photo_deletion->get_error_message()),
             ), $redir);
             $photo_del_error = true;
           }
@@ -73,10 +73,10 @@ add_action('admin_post_pxbx_album_delete', function(){
     }
   } else {
     $redir = add_query_arg(array(
-      'error' => 'No album ID was given.',
+      'error' => urlencode('No album ID was given.'),
     ), $redir);
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });
 

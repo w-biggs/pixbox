@@ -16,7 +16,7 @@ if (empty($_REQUEST['album_ID'])) {
   $redir = add_query_arg(array( 
     'page' => get_pxbx_dir() . '%2Falbum_new.php',
   ), 'admin.php');
-  wp_redirect(esc_url($redir));
+  wp_safe_redirect($redir);
   exit;
 }
 

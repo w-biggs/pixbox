@@ -37,14 +37,14 @@ add_action('admin_post_pxbx_album_edit', function(){
       }
     } else {
       $redir = add_query_arg(array(
-        'error' => 'No title was given.',
+        'error' => urlencode('No title was given.'),
       ), $redir);
     }
   } else {
     $redir = add_query_arg(array(
-      'error' => 'No album ID was given.',
+      'error' => urlencode('No album ID was given.'),
     ), $redir);
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });

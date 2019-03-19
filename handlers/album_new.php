@@ -25,7 +25,7 @@ add_action('admin_post_pxbx_album_new', function(){
     ));
     if(is_wp_error($term)){
       $redir = add_query_arg(array(
-        'error' => $term->get_error_message(),
+        'error' => urlencode($term->get_error_message()),
       ), $redir);
     } else {
       $redir = add_query_arg(array(
@@ -38,9 +38,9 @@ add_action('admin_post_pxbx_album_new', function(){
     }
   } else {
     $redir = add_query_arg(array(
-      'error' => 'No title was given.',
+      'error' => urlencode('No title was given'),
     ), $redir);
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });

@@ -47,24 +47,24 @@ add_action('admin_post_pxbx_upload', function(){
               );
             } else {
               $redir = add_query_arg(array(
-                'error' => $post->get_error_message(),
+                'error' => urlencode($post->get_error_message()),
               ), $redir);
               break;
             }
           } else {
             $redir = add_query_arg(array(
-              'error' => "move failed - invalid filename",
+              'error' => urlencode('Move failed - invalid filename.'),
             ), $redir);
             break;
           }
         }
       } else {
         $redir = add_query_arg(array( 
-          'error' => 'failed to create directory'
+          'error' => urlencode('Failed to create directory.')
         ), $redir);
       }
     }
   }
-  wp_redirect($redir);
+  wp_safe_redirect($redir);
   exit;
 });
