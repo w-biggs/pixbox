@@ -26,8 +26,8 @@ $redir = add_query_arg(array(
 
 if(isset($_GET['album'])){
   $album = get_term($_GET['album'],'pixbox_albums');
-  if($_COOKIE['album_pass']){
-    $in_pass = $_COOKIE['album_pass'];
+  if($_COOKIE['album_' . $album->term_id . '_pass']){
+    $in_pass = $_COOKIE['album_' . $album->term_id . '_pass'];
   } else {
     $in_pass = false;
   }
