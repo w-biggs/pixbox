@@ -81,7 +81,6 @@ add_action('admin_post_pxbx_album_delete', function(){
 });
 
 function recursiveDelete($dir_path){
-  var_dump($dir_path);
   if(file_exists($dir_path)){
     $rdi = new RecursiveDirectoryIterator($dir_path, FilesystemIterator::SKIP_DOTS | FilesystemIterator::UNIX_PATHS);
     $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST); 
