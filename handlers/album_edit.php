@@ -25,6 +25,10 @@ add_action('admin_post_pxbx_album_edit', function(){
           'album_ID' => $parent,
         ), $redir);
       }
+      wp_update_term($term->term_id, 'pixbox_albums', array(
+        'name' => $title,
+        'parent' => $parent
+      ));
       if(isset($_POST['passcheck'])){
         $current_pass = get_term_meta($term->term_id, 'album_pass', true);
         if(!empty($_POST['album_pass']) && ($_POST['album_pass'] !== $current_pass)){
