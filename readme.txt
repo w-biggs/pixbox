@@ -11,6 +11,9 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 A private photo albums plugin.
 
 == Changelog ==
+- 0.5.1:
+  - FIX: You can now edit album names and parents - not sure how I skipped this, oops.
+  - FIX: Deleting an album will no longer throw a "headers already sent" error on PHP5.
 - 0.5:
   - ADD: Error and success messages are now rendered as notices.
   - ADD: The "add password" field is now greyed out when the password checkbox isn't checked.
